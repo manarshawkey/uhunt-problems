@@ -1,0 +1,47 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main() {
+/*#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+#endif*/
+	// your code goes here
+	int n, m;
+	cin>> n >> m;
+	while(n != 0 && m != 0){
+		int x, sum = 0, s = 0;
+		vector<int> a;
+		vector<int> b;
+		for(int i = 0; i < n; i++){
+			cin>> x;
+			s+= x;
+			b.push_back(x);    // b carries the diameters of the heads!, n is the nom. of the heads!
+		}
+		for(int i = 0; i < m; i++){
+			cin >> x;
+			a.push_back(x);  // a carries the heights of the knights!, m is their nom.
+		}
+		sort(a.begin(), a.end());
+		sort(b.begin(), b.end());
+		int count = 0;
+		for(int i = 0; i < m && count < n; i++){
+			if(a[i] >= b[count]){
+				sum+= a[i];
+				count++;
+			}
+		}
+		if(count < n )
+			cout << "Loowater is doomed!" << endl;
+		else
+			cout << sum << endl;
+		cin >> n >> m;
+		a.clear();
+		b.clear();
+	}
+	return 0;
+}

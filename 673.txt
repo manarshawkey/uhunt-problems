@@ -1,0 +1,71 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std; 
+char fun(char a){
+	if(a == '(')
+		return ')';
+	if(a == ')')
+		return '(';
+	if(a == '[')
+		return ']';
+	if(a == ']')
+		return '[';
+}
+string remove(string a, int b){
+	string m = "";
+	for(int i = 0; i < a.length(); i++){
+		if(i != b)
+			m+= a.at(i);
+	}
+	return m;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	string s;
+	int n;
+	cin >> n;
+	cin.ignore(1);
+	while(n > 0){
+		stack<char> st;
+		bool flg = 1;
+		getline(cin, s);
+		if(s.length() % 2 == 1)
+			cout << "No" << endl;
+		else
+			if(s.length() == 0)
+				cout << "Yes" << endl;
+		else
+		{
+			for(int i = 0; i < s.length() && flg; i++){
+				if(s[i] == '[' || s[i] == '('){
+					st.push(s[i]);
+				}
+				else
+				{
+					if(!st.empty() && st.top() == fun(s[i]))
+						st.pop();
+					else
+						 flg = 0;
+				}
+			}
+			if(!flg || ! st.empty())
+				cout << "No" << endl;
+			else
+				cout << "Yes" << endl;
+		}
+		n--;
+	}
+	return 0;
+}
+
+

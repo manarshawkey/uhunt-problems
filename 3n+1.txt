@@ -1,0 +1,72 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main() {
+
+	// your code goes here
+
+	int m, n, t;
+
+	cin >> m >> n;
+	
+	do{
+	
+    	bool flag = false;
+
+	    if( m > n){
+	        
+		flag = true;
+
+	        t = m;
+
+	        m = n;
+
+	        n = t;
+
+	    }
+
+	    int max = 0;
+ 	    int count = 1;
+
+	    for(int i = m; i <= n; i++){
+
+	        count = 1;
+
+		int x = i;
+
+	    while( x!= 1){
+
+	        if (x % 2 == 0)
+
+	            x = x / 2;
+
+	        else
+
+	            x = 3 * x +1;
+ 
+	       count++;
+
+	    }
+
+	    if ( count > max)
+
+	        max = count;
+
+	}
+
+	if (!flag)
+
+	    cout << m << " " << n << " " << max << endl;
+
+	else
+
+	    cout << n << " " << m << " " << max << endl;
+
+	}
+
+	while (cin >> m >> n );
+
+	return 0;
+}

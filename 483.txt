@@ -1,0 +1,60 @@
+#include <iostream>
+
+#include<string>
+
+using namespace std;
+
+string solve(string);
+
+int main() {
+
+	// your code goes here
+
+    string s, tt = "";
+
+    while(getline(cin, s, '\n')){
+
+        for(int i = 0; i < s.length(); i++){
+
+            tt = "";
+
+            while(s[i] != ' ' && i < s.length()){
+
+                    tt+= s[i++];
+}
+
+            if(i < s.length()-1)
+
+                cout << solve(tt) << " ";
+
+            else
+
+            cout<< solve(tt);
+
+        }
+
+        cout << endl;
+
+    }
+
+	return 0;
+
+}
+
+string solve(string ss){
+
+    int l = ss.length();
+
+    for(int i = 0, j = l-1; i < l / 2, j >= l / 2; i++, j--){
+
+        char t = ss[i];
+
+        ss[i] = ss[j];
+
+        ss[j] = t;
+
+    }
+
+    return ss;
+
+}

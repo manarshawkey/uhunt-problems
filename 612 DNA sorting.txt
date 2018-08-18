@@ -1,0 +1,64 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std; 
+class sequence{
+public:
+	string seq;
+	int count, index;
+	sequence();
+	bool operator<(const sequence&)const;
+};
+sequence :: sequence(){
+	seq = "";
+	count = 0;
+	index = 0;
+}
+bool sequence :: operator <(const sequence& a) const{
+	if(this -> count != a.count)
+		return (this -> count < a.count);
+	else
+		return (this -> index < a.index);
+}
+int solve(string s){
+	int c = 0;
+	for(int i = 0; i < s.length()-1; i++){
+		for(int j = i+1; j < s.length(); j++)
+			if(s[i] > s[j])
+				c++;
+	}
+	return c;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	int n;
+	cin >> n;
+	while(n > 0){
+		int a, b;
+		cin >> a >> b;
+		vector<sequence> x(b);
+		for(int i = 0; i < b; i++){
+			cin >> x[i].seq;
+			x[i].count = solve(x[i].seq);
+			x[i].index = i;
+		}
+		sort(x.begin(), x.end());
+		for(int i = 0; i < b; i++)
+			cout << x[i].seq << endl;
+		n--;
+		if(n > 0)
+			cout << endl;
+	}
+	return 0;
+}
+
+

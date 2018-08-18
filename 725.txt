@@ -1,0 +1,94 @@
+
+#define cin file_in
+#define cout file_out
+
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<sstream>
+#include<map>
+#include <tuple>
+#include<fstream>
+using namespace std;
+bool isPrime(int x) {
+	bool flg = 1;
+	for (int i = 2; i * i < x && flg; i++) {
+		if (!(x % i))
+			flg = 0;
+	}
+	return flg;
+}
+bool distinct(int x, int y) {
+	bool flg = 1;
+	vector<int> a;
+	for (int i = 0; i < 5; i++) {
+		a.push_back(x % 10);
+		x /= 10;
+	}
+	for (int i = 0; i < 5; i++) {
+		a.push_back(y % 10);
+		y /= 10;
+	}
+	for (int i = 0; i < a.size()-1; i++) {
+		for (int j = i + 1; j < a.size(); j++)
+			if (a[i] == a[j])
+				return 0;
+	}
+	return a.size()==10;
+}
+int main() {
+	ifstream file_in("input.in");
+	ofstream file_out("output.out");
+	int n;
+	cin >> n;
+	while (n) {
+		bool found = 0;
+		for (int i = 1234; i <= 99999; i++) {
+			int x = n * i;
+			if (x > 99999)
+				continue;
+			if (distinct(x, i)) {
+				if (i < 10000 )
+					cout << x << " / " << 0 << i << " = " << n << endl;
+				else
+					cout << x << " / " << i << " = " << n << endl;
+				found = 1;
+			}
+		}
+		if (!found)
+			cout << "There are no solutions for " << n <<".\n";
+
+		cin >> n;
+		if(n) cout << endl;
+	}
+		
+	system("pause");
+	return 0;
+}
+//cout << "Hello Manaro :)" << endl;
+/*
+
+cin >> n;
+while (n) {
+int sum = 0;
+vector<int> x(n);
+map<int, int> mymap;
+for (int i = 0; i < n; i++) {
+cin >> x[i];
+}
+for (int i = 0; i < n-1; i++) {
+for (int j = i + 1; j < n; j++) {
+if (x[i] > x[j]) {
+//swap(x[i], x[j]);
+sum += 1;
+}
+}
+}
+if (sum % 2)
+cout << "Marcelo" << endl;
+else
+cout << "Carlos" << endl;
+cin >> n;
+}*/

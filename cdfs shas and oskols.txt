@@ -1,0 +1,54 @@
+http://codeforces.com/problemset/problem/294/A
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+string remDup(string s){
+	for(int i = 0; i < s.length()-1; i++){
+		for(int j = i+1; j < s.length(); j++){
+			if(s[i] == s[j])
+				s.erase(j--, 1);
+		}
+	}
+	return s;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output1.out", "w", stdout);
+	#endif
+	int n;
+	cin >> n;
+	vector<int> line(n+1);
+	for(int i = 1; i <= n; i++){
+		cin >> line[i];
+	}
+	int m;
+	cin >> m;
+	for(int i = 0; i < m; i++){
+		int sh, bird, right, left;
+		cin >> sh >> bird;
+		right = line[sh] - bird;
+		left = bird - 1;
+		line[sh] = 0;
+		if(sh > 1 && sh != n){
+			line[sh-1] += left;
+			line[sh+1] += right;
+		}
+		else
+			if(sh == 1 && sh < n)
+				line[sh+1] += right;
+			else
+				if(sh == n && sh > 1)
+					line[sh-1] += left;
+	}
+	for(int j = 1; j <= n; j++)
+		cout << line[j] << endl;
+	return 0;
+}

@@ -1,0 +1,58 @@
+//10141 request of proposal
+#include <iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+class proposal{
+    public:
+    bool operator< (const proposal&) const;
+    string name;
+    int index;
+	double price, metR;
+	double compliance;
+};
+bool proposal :: operator<(const proposal& b) const {
+    if(this-> metR != b.metR )
+        return (this->metR > b.metR);
+    else
+	    if(this -> price != b.price)
+	        return (this->price < b.price);
+	    else
+	        return(this -> index < b.index);
+}
+int main() {
+	// your code goes here
+	int r;  //nom. of requirements
+	int p; // nom. of proposals
+	string req;
+	int count = 1;
+	vector<proposal> prop;
+	proposal x;
+	double y;
+	cin >> r >> p;
+	while(r != 0 && p != 0){
+		if(count > 1)
+			cout << endl;
+	cin.ignore(1, '\n');
+	for(int j = 0; j < r; j++){
+	    getline(cin, req, '\n');
+    }
+	for(int i = 0; i < p; i++){
+	    getline(cin, x.name, '\n');
+	    cin >> x.price >> x.metR;
+	    cin.ignore(1, '\n');
+	    x.compliance = x.metR / r;
+	    x.index = i;
+	    prop.push_back(x);
+	    for(int k = 0; k < x.metR; k++)
+	        getline(cin, req, '\n');
+	}
+    sort(prop.begin(), prop.end());
+	x = prop.at(0);
+	cout<< "RFP #" << count++ << endl <<  x.name << endl;
+	prop.clear();
+	cin >> r >> p;
+	}
+	return 0;
+}

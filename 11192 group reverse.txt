@@ -1,0 +1,38 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+string rev(string s, int st, int e){
+	string ss;
+	for(int i = e-1; i >= st ; i--){
+		ss+= s[i];
+	}
+	return ss;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	string x;
+	int g;
+	cin >> g;
+	while( g != 0){
+		cin.ignore(1);
+		cin >> x;
+		g = x.length()/ g;
+		string ans = "";
+		for(int i = 0; i < x.length(); i+= g){
+			ans+= rev(x, i, i+g);
+		}
+		cout << ans << endl;
+		cin >> g;
+	}
+	return 0;
+}

@@ -1,0 +1,90 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+int palindrome(string s){
+	int flg = 1;
+	for(int i = 0; i < s.length() && flg; i++){
+		int x = s.length() - i - 1;
+		if(s[i] != s[x])
+			flg = 0;
+	}
+	return flg;
+}
+char rev(char c){
+	if(c == 'E')
+		return '3';
+	if(c == 'J')
+		return 'L';
+	if(c == 'S')
+		return '2';
+	if(c == 'Z')
+		return '5';
+	if(c == 'Y')
+		return 'Y';
+	if(c == 'H')
+		return 'H';
+	if(c == 'I')
+		return 'I';
+	if(c == 'A')
+		return 'A';
+	if( c == 'M')
+		return 'M';
+	if(c == 'L')
+		return 'J';
+	if(c == 'O')
+		return 'O';
+	if(c == 'T')
+		return 'T';
+	if(c == 'U')
+		return 'U';
+	if(c == 'V')
+		return 'V';
+	if(c == 'W')
+		return 'W';
+	if(c == 'X')
+		return 'X';
+	if(c == '1')
+		return '1';
+	if(c == '2')
+		return 'S';
+	if(c == '3')
+		return 'E';
+	if(c == '5')
+		return 'Z';
+	if(c == '8')
+		return '8';
+	else
+		return ++c;
+}
+int mirrored(string s){
+	bool flg = 1;
+	for(int i = 0; i < s.length() && flg; i++){
+		char x = rev(s[s.length() - i - 1]);
+		 if(s[i] != x)
+			 flg = 0;
+	}
+	return flg;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	string s;
+	while(cin >> s){
+		if(palindrome(s) && mirrored(s))
+			cout << s << " -- is a mirrored palindrome." << endl;
+		else
+			if(mirrored(s))
+				cout << s << " -- is a mirrored string." << endl;			else				if(palindrome(s))					cout << s << " -- is a regular palindrome." << endl;				else					cout << s << " -- is not a palindrome." << endl;
+		cout << endl;
+	}
+	return 0;
+}

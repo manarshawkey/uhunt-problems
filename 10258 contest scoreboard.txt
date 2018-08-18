@@ -1,0 +1,91 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std; 
+class problem{
+	int i;
+	bool res;
+};
+class cont{
+public:
+	int num, penalty;  
+	int penalty1[10];
+	bool operator<(const cont& ) const;
+	cont();
+	int solved;
+	vector<int> p;
+};
+cont :: cont(){
+	solved = 0;
+	num = 0;
+	penalty = 0;
+	for(int i = 0; i < 10; i++)
+		penalty1[i] = 0;
+}
+bool cont :: operator<(const cont& a) const{
+	if(this->solved != a.solved)
+		return (this->solved > a.solved);
+	else if(this->penalty != a.penalty)
+		return (this->penalty < a.penalty);
+	else 
+		return (this->num < a.num);
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	int n;
+	cin >> n; 
+	cin.ignore(2);
+	while(n > 0){
+		vector<cont> x(101);
+		int a, b, c;
+		char d;
+		string s;
+		getline(cin, s);
+		while(s != ""){
+			stringstream(s) >> a >> b >> c >> d;
+			x[a].num = a;
+			if( d == 'C'){
+			bool flg = 1;
+			for(int i = 0; flg && i < x[a].p.size(); i++)
+				if(x[a].p[i] == b)
+					flg = 0;    //correct submission found!
+			if(flg){
+				x[a].penalty+= c;
+				x[a].p.push_back(b);
+				x[a].solved++;
+				x[a].penalty+= x[a].penalty1[b];
+			}
+			}
+			else
+				if(d == 'I'){
+					bool flg = 1;
+					for(int i = 0; flg && i < x[a].p.size(); i++)
+						if(x[a].p[i] == b)
+							flg = 0;    //correct submission found!
+					if(flg)
+						x[a].penalty1[b]+= 20;
+				}
+			getline(cin, s);
+		} 
+		sort(x.begin(), x.end());
+		for(int i = 0; i < x.size(); i++){
+			if(x[i].num != 0)
+				cout << x[i].num << " " << x[i].solved << " " << x[i].penalty << endl;
+		}
+		x.clear();
+		n--;
+		if(n > 0)
+			cout << endl;
+	}
+	return 0;
+}
+

@@ -1,0 +1,47 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std; 
+bool isprime(int a){
+	if(a == 1)
+		return 0;
+	bool flg = 1;
+	for(int i = 2; i * i <= a && flg; i++){
+		if( a % i == 0)
+			flg = 0; 
+	}
+	return flg;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	vector<int> prime(32800);
+	for(int i = 0; i < 32800; i++){
+		if(isprime(i))
+			prime[i] = 1;
+		else
+			prime[i] = 0;
+	}
+	int x;
+	cin >> x;
+	while (x != 0){
+		int count = 0;
+		for(int i = 2; i * 2 <= x; i++){
+			if( prime[i] && prime[x-i])
+				count++;
+		}
+		cout << count << endl;
+		cin >> x;
+	}
+	return 0;
+}
+
+

@@ -1,0 +1,57 @@
+//https://uva.onlinejudge.org/external/105/10550.pdf
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+using namespace std;
+int st, sum;
+void func(int f) {
+	if (f > st) {
+		int x = 40 - f;
+		x += st;
+		sum += x / 40.0 * 360;
+		st = f;
+	}
+	else {
+		if (st != f) {
+			int x = st - f;
+			sum += x / 40.0 * 360;
+		}
+		st = f;
+	}
+}
+void func1(int s) {
+	if (s > st) {
+		int x = s - st;
+		sum += x / 40.0 * 360;
+		st = s;
+	}
+	else {
+		if (s != st) {
+			int x = 40 - st;
+			x += s;
+			sum += x / 40.0 * 360;
+		}
+		st = s;
+	}
+}
+int main() {
+	int fr, sc, thr;
+	cin >> st >> fr >> sc >> thr;
+	while (st || fr || sc || thr) {
+		sum = 1080;
+		if (st == fr && fr == sc && sc == thr)
+			cout << sum << endl;
+		else {
+			func(fr);
+			func1(sc);
+			func(thr);
+			cout << sum << endl;
+		}
+		cin >> st >> fr >> sc >> thr;
+	}
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,29 @@
+//https://uva.onlinejudge.org/external/101/10107.pdf
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output1.out", "w", stdout);
+	#endif
+	vector<int> x;
+	int y;
+	while(cin >> y){
+		x.push_back(y);
+		sort(x.begin(), x.end());
+		int a = x.size();
+		if(a % 2 == 1)
+			cout << x[a/2] << endl;
+		else
+			cout << (x[a/2] + x[(a/2) -1]) / 2 << endl;
+	}
+	return 0;
+}

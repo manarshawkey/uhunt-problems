@@ -1,0 +1,139 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+using namespace std;
+string toLower(string s){
+	for(int i = 0; i < s.length(); i++){
+		if(s[i] <= 'Z' && s[i] >= 'A'){
+			s[i] = s[i]  -'A' +'a';
+		}
+	}
+	return s;
+}
+class team{
+public:
+	string name;
+	int points, wins, goalsc, games, ties, loss, goalag, goaldiff; 
+	bool operator<(const team&) const; 
+	team();
+};
+bool team :: operator<(const team& b)const {
+	if(this -> points != b.points)
+		return (this->points < b.points);
+	else
+		if(this -> wins != b.wins)
+			return (this-> wins < b.wins);
+		else
+			if(this -> goaldiff != b.goaldiff)
+				return ( this-> goaldiff < b.goaldiff);
+			else
+				if(this -> goalsc != b.goalsc)
+					return (this-> goalsc < b.goalsc);
+				else
+					if(this -> games != b.games)
+						return (this-> games > b.games);
+					else
+						if( this -> ties != b.ties)
+							return (this -> ties < b.ties);
+						else
+							return(toLower(this -> name) > toLower(b.name));
+}
+team :: team(){
+	points = 0;
+	wins = 0;
+	goalsc = 0;
+	games = 0;
+	ties = 0;
+	loss = 0;
+	goalag = 0;
+	goaldiff = 0;
+	name = "";
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	string s;
+	int n;
+	cin >> n;
+	cin.ignore(1);
+	while(n > 0){
+		
+		string tour;
+		getline(cin, tour);
+		int t;
+		cin >> t;
+		cin.ignore(1);
+		vector<team> teams(t);
+		map<string, int> x;
+		for(int j = 0; j < t; j++){
+			string a;
+			getline(cin, a, '\n');
+			teams[j].name = a;
+			x.insert(pair<string, int> (a, j));
+		}
+		int g;
+		cin >> g;
+		cin.ignore(1, '\n');
+		for(int j = 0; j < g; j++){
+			string n1, n2;
+			int s1, s2;
+			getline(cin, n1, '#');
+			cin >> s1;
+			cin.ignore(1);
+			cin >> s2;
+			cin.ignore(1);
+			getline(cin, n2, '\n');
+			int i = x[n1];
+			teams[i].games++;
+			teams[i].goalsc+= s1;
+			teams[i].goalag+= s2;
+			if(s1 > s2 ){
+				teams[i].wins++; 
+				teams[i].points+= 3;
+				}
+			else
+				if(s1 == s2){
+					teams[i].ties++;
+					teams[i].points++;
+				}
+				else
+					teams[i].loss++;
+				teams[i].goaldiff = teams[i].goalsc - teams[i].goalag;
+			
+			i = x[n2];
+			teams[i].games++;
+			teams[i].goalsc+= s2;
+			teams[i].goalag+= s1;
+			if(s2 > s1 ){
+				teams[i].wins++;
+				teams[i].points+= 3;
+				}
+			else
+				if(s1 == s2){
+					teams[i].ties++; 
+					teams[i].points++;
+					}
+				else
+					teams[i].loss++;
+			teams[i].goaldiff = teams[i].goalsc - teams[i].goalag;
+		}
+		sort(teams.rbegin(), teams.rend());
+		cout << tour << endl;
+		for(int i = 1; i <= t; i++){
+			cout << i << ") " << teams[i-1].name << " " << teams[i-1].points << "p, " << teams[i-1].games << "g (" << teams[i-1].wins << "-" << teams[i-1].ties << '-' << teams[i-1].loss << "), " << teams[i-1].goaldiff << "gd (" << teams[i-1].goalsc << '-' << teams[i-1].goalag << ')' << endl;
+		}
+		n--;
+		if(n >= 1)
+			cout << endl;
+	}
+	return 0;
+}
+
+

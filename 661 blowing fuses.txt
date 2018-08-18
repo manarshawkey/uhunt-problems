@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+using namespace std;
+class C
+{
+public:
+	int capacity;
+	bool status;
+};
+int main(){
+	int n, m, tCap, sequence = 1;
+	C A[22];
+	cin >> n >> m >> tCap;
+	while( n != 0 && m != 0 && tCap != 0){
+		int sum = 0;
+		int maxx = 0, x;
+		for(int i = 1; i <= n; i++){
+			cin >> A[i].capacity;
+			A[i].status = 0;
+		}
+		for(int i = 1; i <= m; i++){
+			cin >> x;
+			if(!A[x].status){
+				sum+= A[x].capacity;
+				A[x].status = 1;
+				maxx = max(maxx, sum);
+			}
+			else
+			{
+				sum-= A[x].capacity;
+				A[x].status = 0;
+			}
+		}
+		if (maxx > tCap)
+			cout << "Sequence " << sequence << endl << "Fuse was blown." << endl;
+		else
+			cout << "Sequence " << sequence << endl << "Fuse was not blown." << endl << "Maximal power consumption was " << maxx << " amperes." << endl;
+		sequence++;
+		cout << endl;
+        cin >> n >> m >> tCap;
+	}
+	return 0;
+}

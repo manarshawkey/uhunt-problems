@@ -1,0 +1,52 @@
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<sstream>
+#include<map>
+using namespace std;
+int fr[101];
+int main() {
+
+	//https://uva.onlinejudge.org/external/114/11462.pdf
+	int n;
+	cin >> n;
+	while (n) {
+		int max = 100;
+		vector<int> x(n+1);
+		for (int i = 1; i <= n; i++) {
+			cin >> x[i];
+		}
+			for (int i = 1; i <= n; i++)
+				fr[x[i]]++;
+			int a = 1;
+			for (int i = 0; i <= max; i++) {
+				while (fr[i]) {
+					x[a++] = i;
+					fr[i]--;
+				}
+			}
+			for (int i = 1; i < n; i++)
+					cout << x[i] << " ";
+			cout << x[n] << endl;
+			for (int i = 0; i < 101; i++)
+				fr[i] = 0;
+
+			cin >> n;
+	}
+	system("pause");
+	return 0;
+}
+
+/*
+for (int n = 1; n < 65; n *= 2) {
+int sum = 0;
+for (int i = 1; i <= n; i++)
+for (int m = 1; m <= i; m++)
+for (int k = 1; k <= m*i; k++)
+sum++;
+cout << "n = " << n << ", nom. of operaions = " << sum << endl;
+}
+*/
+	//cout << "Hello Manaro :)" << endl;

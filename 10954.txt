@@ -1,0 +1,43 @@
+
+#define cin file_in
+#define cout file_out
+
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<sstream>
+#include<map>
+#include <tuple>
+#include<fstream>
+using namespace std;
+int main() {
+
+	//https://uva.onlinejudge.org/external/109/10954.pdf
+	ifstream file_in("input.in");
+	ofstream file_out("output.out");
+	int n;
+	cin >> n;
+	while (n) {
+		vector<long long> vec(n);
+		for (int i = 0; i < n; i++)
+			cin >> vec[i];
+		sort(vec.rbegin(), vec.rend());
+		long long cost = 0;
+		long long sum = 0;
+		while (vec.size() > 1) {
+			sum = vec[vec.size() - 1] + vec[vec.size() - 2];
+			vec.pop_back();
+			vec.pop_back();
+			vec.push_back(sum);
+			cost += sum;
+			sort(vec.rbegin(), vec.rend());
+		}
+		cout << cost << endl;
+		cin >> n;
+	}
+	system("pause");
+	return 0;
+}
+	//cout << "Hello Manaro :)" << endl;

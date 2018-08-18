@@ -1,0 +1,45 @@
+
+#define cin file_in
+#define cout file_out
+
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<sstream>
+#include<map>
+#include <tuple>
+#include<fstream>
+using namespace std;
+int main() {
+	ifstream file_in("input.in");
+	ofstream file_out("output.out");
+	int t;
+	cin >> t;
+	while (t--) {
+		int a, b, c, x, y, z;
+		cin >> a >> b >> c;
+		int flg = 1;
+		for (int i = -100; i < 101 && flg; i++) {
+			for (int j = -100; j < 101 && flg; j++) {
+				int k = a - (i + j);
+				if (b == i * j * k && c == (i*i + j*j + k*k)) {
+					x = i;
+					y = j;
+					z = k;
+					flg = 0;
+				}
+			}
+		}
+		if (flg || x == y || y == z || x == z)
+			cout << "No solution." << endl;
+		else
+			cout << x << " " << y << " " << z << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+	//cout << "Hello Manaro :)" << endl;
+	

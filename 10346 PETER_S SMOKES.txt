@@ -1,0 +1,28 @@
+//10346 PETER'S SMOKES
+#include <iostream>
+#include<cmath>
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+using namespace std;
+int main() {
+/*#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+#endif*/
+	int n, k;
+	while(cin >> n >> k){
+		int sum = 0;
+		sum+= n;
+		while(n >= k){ 
+			int rem = n % k;
+			n/= k;
+			sum+= n;
+			n+= rem;
+		}
+		cout << sum << endl;
+	}
+	
+	return 0;
+}

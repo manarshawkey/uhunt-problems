@@ -1,0 +1,131 @@
+https://uva.onlinejudge.org/external/8/821.pdf
+#include<iostream>
+#include<string>
+#include<map>
+#include<vector>
+#include<cmath>
+#include<algorithm>
+#include<iomanip>
+#include <limits>
+#include <cstdint>
+
+using namespace std;
+
+int a[101][101];
+int s;
+
+double func() {
+	int sum = 0;
+
+
+	/*/debugging
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}*/
+
+	for (int k = 1; k <= s; k++) {
+		for (int i = 1; i <= s; i++) {
+			for (int j = 1; j <= s; j++) {
+				int m;
+				if (a[i][k] == INT_MAX || a[k][j] == INT_MAX)
+					m = INT_MAX;
+				else
+					m = a[i][k] + a[k][j];
+				a[i][j] = min(a[i][j], m);
+			}
+		}
+	}
+
+	
+
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++)
+			sum += a[i][j];
+	}
+	return (sum * 1.0 / ((s * s) - s));
+}
+
+void generateMatrix(vector<int> v, vector<int> v1) {
+
+	map<int, int> m;
+	sort(v1.begin(), v1.end());
+	int x = v1[0];
+	int n = v1.size();
+	//removing the duplicates from V1
+	for (int i = 1; i < v1.size(); i++) {
+		if (v1[i] == x)
+			v1.erase(v1.begin() + i--);
+		else
+			x = v1[i];
+	}
+	for (int i = 0; i < v1.size(); i++) {
+		m[v1[i]] = i + 1;
+		//cout << v1[i] << " " << i + 1 << endl;
+	}
+
+	s = m.size();
+
+	/*/debugging 
+	cout << endl << "Before resetting the array: " << endl;
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}
+	//*/
+	for (int i = 1; i <= s; i++)
+		for (int j = 1; j <= s; j++)
+			a[i][j] = 0;
+	/*cout << endl << "After Resetting: " << endl;
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}
+	/*/
+	for (int i = 0; i < v.size() - 1; i += 2) {
+		int b = m[v[i]];
+		int c = m[v[i + 1]];
+		a[b][c] = 1;
+	}
+	/*cout << endl << "Before INT_MAX: " << endl;
+	for (int i = 1; i <= s; i++) {
+		for (int j = 1; j <= s; j++)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}
+	/*/
+	for (int i = 1; i <= m.size(); i++) {
+		for (int j = 1; j <= m.size(); j++)
+			if (i != j && !a[i][j])
+				a[i][j] = INT_MAX;
+	}
+	
+}
+
+int main() {
+	int a, b, n = 0, cas = 0;
+	vector<int> v;
+	cin >> a >> b;
+	
+	while (a && b) {
+		v.push_back(a);
+		v.push_back(b);
+		cin >> a >> b;
+		while (a && b) {
+			v.push_back(a);
+			v.push_back(b);
+			cin >> a >> b;
+		}
+		vector<int> v1 = v;
+		generateMatrix(v, v1);
+		cout <<fixed << setprecision(3) <<"Case " << ++cas << ": average length between pages = " << func() << " clicks" << endl;
+		v1.clear();
+		v.clear();
+		cin >> a >> b;
+	}
+	system("pause");
+	return 0;
+}

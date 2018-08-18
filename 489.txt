@@ -1,0 +1,56 @@
+//https://uva.onlinejudge.org/external/4/489.pdf
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+string remDup(string s){
+	for(int i = 0; i < s.length()-1; i++){
+		for(int j = i+1; j < s.length(); j++){
+			if(s[i] == s[j])
+				s.erase(j--, 1);
+		}
+	}
+	return s;
+}
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output1.out", "w", stdout);
+	#endif
+	int round;
+	cin >> round;
+	while(round != -1){
+		string word, guess;
+		cin >> word >> guess;
+		word = remDup(word);
+		guess = remDup(guess);
+		int wrong = 0;
+		for(int i = 0; i < guess.length() && word != ""; i++){
+			int flg = 0;
+			for(int j = 0; j < word.length(); j++){
+				if(guess[i] == word[j]){
+					word.erase(j--, 1);
+					flg = 1;
+				}
+			}
+			if(!flg)
+				wrong++;
+		}
+		if( word == "" && wrong < 7)
+			cout << "Round " << round << endl << "You win." << endl;
+		else
+			if(wrong >= 7)
+				cout << "Round " << round << endl << "You lose." << endl;
+			else
+				cout << "Round " << round << endl << "You chickened out." << endl;
+
+		cin >> round;
+	}
+	return 0;
+}

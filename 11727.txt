@@ -1,0 +1,21 @@
+#include <iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n, y;
+	vector<int> x;
+	cin >> n;
+	for(int i = 1; i <= n; i++){
+	    for(int j = 0; j < 3; j++){
+	        cin >> y;
+	        x.push_back(y);
+	    }
+	    sort(x.begin(), x.begin()+3);
+	    cout << "Case " << i << ": " << x[1] << endl;
+	    x.clear();
+	}
+	return 0;
+}

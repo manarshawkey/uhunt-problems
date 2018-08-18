@@ -1,0 +1,38 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+#include<map>
+#include<stack>
+using namespace std;
+int main() {
+	#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif
+	int t, a = 1;
+	cin >> t;
+	while(t != 0){
+		vector<int> x(t);
+		int ans = 0, sum = 0;
+		for(int i = 0; i < t; i++){
+			cin >> x[i];
+			sum+= x[i];
+		}
+		int y = sum / t;
+		for(int i = 0; i < t; i++){
+			if(x[i] > y)
+				ans+= x[i] - y;
+		}
+		cout << "Set #" << a++ << endl;
+		cout << "The minimum number of moves is " << ans << "." << endl;
+		cout << endl;
+		cin >> t;
+	}
+
+	return 0;
+}
+

@@ -1,0 +1,46 @@
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+#include<algorithm>
+#include<vector>
+#include<sstream>
+#include<string>
+using namespace std;
+ 
+int main() {
+	/*#if !ONLINE_JUDGE
+	freopen("input.in","r",stdin);
+	freopen("output.out", "w", stdout);
+	#endif*/
+	int n;
+	cin >> n;
+	while(n > 0){
+		vector<int> ind;
+		string s; int x, c = 0;
+		string y;
+		getline(cin, s);
+		while( s == "")
+			getline(cin, s);
+		stringstream stream(s);
+		while(stream >> x){
+			ind.push_back(x);
+			c++;
+		}
+		vector<string> elm(c+1);
+		for(int i = 0; i < c; i++){
+			cin >> y;
+			x = ind[i];
+			elm[x] = y;
+		}
+		int i;
+		for( i = 1; i <= c; i++)
+			cout << elm[i] << endl;
+		if(n > 1)
+			cout << endl;
+		n--;
+	}
+
+	return 0;
+}
+
+

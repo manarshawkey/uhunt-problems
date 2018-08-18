@@ -1,0 +1,66 @@
+#include <iostream>
+
+#include<algorithm>
+
+using namespace std;
+
+
+int main() {
+
+	// your code goes here
+
+	int day = 0;
+
+	double h, u, d, f;
+
+	cin >> h >> u >> d >> f;
+	   
+	do{
+
+	    		day = 0;
+
+			bool flag = false;
+
+			f = u * f / 100;
+
+			int hh = h;
+	
+			while ( !flag){
+
+	    			day++;
+
+	    			h = h - u; //day time
+
+
+	    			if(h < 0){
+
+	        			cout << "success on day " << day << endl;
+
+	        			flag = true;
+
+	    				}
+
+	    			h += d; //night time
+
+	   			if ( h > hh ){
+
+	       			 	cout << "failure on day " << day << endl;
+
+	        			flag = 1;
+
+	    			}
+
+	    			u -= f ;
+
+	    			u = max(u, 0.0);
+
+	    //cout << h << " " << u << endl;
+
+		}
+
+		cin >> h >> u >> d >> f;
+	   
+}while ( h != 0 && u != 0 && d != 0 && f != 0);
+
+	return 0;
+}

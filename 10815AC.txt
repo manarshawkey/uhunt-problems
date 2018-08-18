@@ -1,0 +1,53 @@
+
+#define cin file_in
+#define cout file_out
+
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<sstream>
+#include<map>
+#include <tuple>
+#include<fstream>
+using namespace std;
+int main() {
+
+	//https://uva.onlinejudge.org/external/108/10815.pdf
+	ifstream file_in("input.in");
+	ofstream file_out("output.out");
+	string x; string s;
+	vector<string> vec;
+	map<string, bool> mymap;
+	bool flg = 1;
+	while (getline(cin, x, '\n')) {
+		for (int i = 0; i < x.size(); i++)
+			if ((x[i] > 64 && x[i] < 91) || (x[i] > 96 && x[i] < 123))
+				s += tolower(x[i]);
+			else
+				if (s != "" && !mymap[s]) {
+					mymap.insert(pair<string, bool>(s, 1));
+					vec.push_back(s);
+					s = "";
+				}
+		if (s != "" && !mymap[s]) {
+			mymap.insert(pair<string, bool>(s, 1));
+			vec.push_back(s);
+			s = "";
+		}
+	}
+	sort(vec.begin(), vec.end());
+	 x = vec[0];
+	cout << x << endl;
+	for (int i = 1; i < vec.size(); i++) {
+		if (vec[i] != x) {
+			cout << vec[i] << endl;
+			x = vec[i];
+		}
+	}
+	//cout << vec[vec.size() - 1];
+	system("pause");
+	return 0;
+}
+	//cout << "Hello Manaro :)" << endl;

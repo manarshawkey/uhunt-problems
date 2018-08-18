@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int b, sum; 
+	while(cin >> b){
+	    bool flag = 0;
+	sum = 0;
+	sum+= b;
+	/*if(b % 3 != 0){
+	    b++;
+	}*/
+	b++;
+	do{
+	    int t = b / 3;
+	    sum+= t;
+	    int rem = b % 3;
+	    b = t + rem;
+	}while(b > 2);
+	    cout << sum << endl;
+	}
+	return 0;
+}
