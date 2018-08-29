@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<cmath>
+#include<algorithm>
+#include<iomanip>
+using namespace std;
+int main() {
+	int min, n, budget, hotels, weeks, nightCost, totalCost, beds;
+	while (cin >> n >> budget >> hotels >> weeks) {
+		min = 2147483647;
+		int bedFlg = 0;
+		for (int i = 0; i < hotels; i++) {
+			cin >> nightCost;
+			totalCost = n * nightCost;
+			for (int j = 0; j < weeks; j++) {
+				cin >> beds;
+				if (beds >= n)
+					bedFlg = 1;
+			}
+			if (bedFlg && totalCost <= min && totalCost <= budget)
+				min = totalCost;
+		}
+		if (min == 2147483647)
+			cout << "stay home" << endl;
+		else
+			cout << min << endl;
+	}
+	system("pause");
+	return 0;
+}
