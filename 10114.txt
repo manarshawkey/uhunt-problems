@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<cmath>
+#include<algorithm>
+#include<iomanip>
+using namespace std;
+int main() {
+	double loan, value, downPay, monthPay, dep, y;
+	int duration, n, x;
+	double m[101];
+	cin >> duration >> downPay >> loan >> n;
+	while (duration > 0) {
+		while (n--) {
+			cin >> x >> y;
+			for (int i = x; i < 101; i++)
+				m[i] = y;
+		}
+		monthPay = loan / duration;
+		value = loan + downPay;
+		value -= (value * m[0]);
+		int c = 0;
+		while (value < loan) {
+			c++;
+			dep = m[c];
+			value -= (value * dep);
+			loan -= monthPay;
+		}
+		cout << c;
+		if (c == 1)
+			cout << " month" << endl;
+		else
+			cout << " months" << endl;
+		cin >> duration >> downPay >> loan >> n;
+	}
+	system("pause");
+	return 0;
+}
