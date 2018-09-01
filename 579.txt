@@ -1,0 +1,66 @@
+https://uva.onlinejudge.org/external/5/579.pdf
+#include<iostream>
+#include<string>
+#include<vector>
+#include<cmath>
+#include<algorithm>
+#include<iomanip>
+#include<map>
+using namespace std;
+vector<string> rod;
+
+/*void one_piece(int i, string s) {
+	if (rod[i] == "+x") {
+		
+	}
+}*/
+int main() {
+	int hour, min;
+	char x;
+	cin >> hour >> x >> min;
+	while (hour || min) {
+		double angle = 0, p = 0;
+		if (hour == 12)
+			hour = 0;
+		hour *= 5;
+		p = min / 60.0;
+		p *= 30;
+		if (min > hour)
+			angle -= p;
+		else
+			angle += p;
+		if (min > hour) {
+			int t = min;
+			min = hour;
+			hour = t;
+		}
+		//min is the smallest of them
+		angle += (hour - min) * 6;
+		if (angle > 180)
+			angle = 360 - angle;
+		cout << fixed << setprecision(3) << abs(angle) << endl;
+		cin >> hour >> x >> min;
+	}
+	system("pause");
+	return 0;
+}
+
+
+/*
+	int l;
+	string s;
+	cin >> l;
+	while (l) {
+		vector<string> bends(l);
+		for (int i = 1; i < l; i++) {
+			rod.push_back("+x");
+		}
+		for (int i = l-1; i > 0; i--) {
+			cin >> s;
+
+		}
+
+
+		cin >> l;
+	}
+*/
